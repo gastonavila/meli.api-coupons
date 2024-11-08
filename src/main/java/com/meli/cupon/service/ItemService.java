@@ -25,7 +25,7 @@ public class ItemService {
     @Autowired
     private WebClient.Builder webClientBuilder;
     
-    private final String ITEM_API_URL = "https://meli-api-items.wl.r.appspot.com/api/items/";
+    private final String ITEM_API_URL = "http://localhost:8080/api/items/";
     
     /**
      * Obtiene los ítems por sus IDs desde una API externa.
