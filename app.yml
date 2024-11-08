@@ -1,0 +1,33 @@
+runtime: java17
+
+env_variables:
+  SPRING_PROFILES_ACTIVE: prod
+
+vpc_access_connector:
+  name: "projects/meli-api-coupon/locations/southamerica-west1/connectors/redis-conector"
+  
+automatic_scaling:
+  min_instances: 10   # Aumenta el número de instancias mínimas
+  max_instances: 50   # O más según sea necesario
+  target_cpu_utilization: 0.65  # Control de la utilización de CPU para optimizar el escalado
+
+instance_class: F4   # Clase de instancia más potente (ajustar según los recursos que necesite tu app)
+
+handlers:
+  - url: /.* 
+    script: auto
+
+health_check:
+  enable_health_check: true
+  check_interval_sec: 5
+  timeout_sec: 4
+  unhealthy_threshold: 2
+  healthy_threshold: 2
+
+region: southamerica-west1  # O la región más cercana a tus usuarios
+
+# Configuración de logs y monitoreo
+logging:
+  level: INFO
+  exclude_paths:
+    - /healthcheck  # Para evitar registrar tráfico de salud si no es necesario
